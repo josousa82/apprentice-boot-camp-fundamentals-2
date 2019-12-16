@@ -1,6 +1,5 @@
 package bowling;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,7 +32,6 @@ public class BowlingTest {
     }
 
     @Test
-    @Ignore
     public void OneSparePerFrameScore(){
 
         int[] rolls = {0,10, 4,6, 5,5, 0,0, 0,0,
@@ -44,6 +42,11 @@ public class BowlingTest {
         assertThat(game.score(rolls))
                 .as("For each frame, has one roll with 0 " +
                 "pins and one with a full pins knocked down, making a spare, with 10 points per frame and total 100 game")
-                .isEqualTo(100);
+                .isEqualTo(39);
+    }
+
+    @Test
+    public void strikeTest(){
+
     }
 }

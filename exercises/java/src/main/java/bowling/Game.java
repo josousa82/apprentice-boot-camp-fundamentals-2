@@ -18,21 +18,19 @@ public class Game {
 
         Integer sum = 0;
 
-        for (Integer a : newArray)  sum+=a;
+        ///for (Integer a : newArray)  sum+=a;
+
+        for (int i = 1; i < newArray.length; i+=2) {
+
+            if(newArray[i] + newArray[i-1] == 10){
+                sum += newArray[i] + newArray[(i-1)] + newArray[i+1];
+            }else{
+                sum += newArray[i] + newArray[i-1];
+            }
+        }
         return sum;
-
-
     }
 
-
-
-    public static void main(String[] args) {
-        int[] test = { 5,5, 0,10, 1,1, 1,1, 1,1,
-                1,1, 1,1, 1,9, 1,1, 1,1 };
-
-        Game game = new Game();
-        game.score(test);
-    }
 
 
 }
