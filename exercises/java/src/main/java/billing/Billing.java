@@ -16,32 +16,18 @@ public class Billing {
         this.numberOfAdditionalProducts = numberOfAdditionalProducts;
     }
 
-    public int totalBillDealer(CustomerType typeCustomer) {
+    public int totalBill(Prices typeCustomer) {
+        return numberOfAdditionalProducts * Prices.ADDITIONAL.getPrice() + numberOfAdverts * typeCustomer.getPrice();
+    }
 
-        if(typeCustomer.equals(CustomerType.DEALER.toString())){
+    public static void main(String[] args) {
+        System.out.println("CustomerType.DEALER.getPrice() = " + (Prices.DEALER.getPrice() + 20));
+        System.out.println("CustomerType.DEALER.getPrice() = " + Prices.DEALER.name());
 
+        Billing billing = new Billing(20, 20);
 
-            int totalBill = numberOfAdditionalProducts * 10 + typeCustomer.getPrice() * numberOfAdverts;
-            return totalBill;
-        }
-
-        return 0;
+        System.out.println("billing = " + billing.totalBill(Prices.DEALER));
     }
 
 }
 
-enum CustomerType{
-    DEALER(50),
-    PRIVATE(20 );
-
-    private int price;
-
-
-    CustomerType(int i) {
-        this.price = i;
-    }
-
-    int getPrice(){
-        return this.price;
-    }
-}
