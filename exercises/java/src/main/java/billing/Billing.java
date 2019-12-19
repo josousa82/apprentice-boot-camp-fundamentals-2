@@ -20,14 +20,14 @@ public class Billing {
         return numberOfAdditionalProducts * Prices.ADDITIONAL.getPrice() + numberOfAdverts * typeCustomer.getPrice();
     }
 
-    public static void main(String[] args) {
-        System.out.println("CustomerType.DEALER.getPrice() = " + (Prices.DEALER.getPrice() + 20));
-        System.out.println("CustomerType.DEALER.getPrice() = " + Prices.DEALER.name());
-
-        Billing billing = new Billing(20, 20);
-
-        System.out.println("billing = " + billing.totalBill(Prices.DEALER));
-    }
+//    public static void main(String[] args) {
+//        System.out.println("CustomerType.DEALER.getPrice() = " + (Prices.DEALER.getPrice() + 20));
+//        System.out.println("CustomerType.DEALER.getPrice() = " + Prices.DEALER.name());
+//
+//        Billing billing = new Billing(20, 20);
+//
+//        System.out.println("billing = " + billing.totalBill(Prices.DEALER));
+//    }
 
 }
 

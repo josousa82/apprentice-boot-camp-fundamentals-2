@@ -6,7 +6,6 @@ public enum Prices {
     ADDITIONAL(10);
 
     private int price;
-    private String typeCustomer;
 
 
     Prices(int i) {

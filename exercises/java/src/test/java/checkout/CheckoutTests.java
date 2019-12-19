@@ -1,5 +1,6 @@
 package checkout;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -32,6 +33,17 @@ public class CheckoutTests {
         checkout.scan("A");
         assertThat(checkout.total()).isEqualTo(130);
     }
+
+//    @Test
+//    public void fiveA() {
+//        Checkout checkout = new Checkout();
+//        checkout.scan("A");
+//        checkout.scan("A");
+//        checkout.scan("A");
+//        checkout.scan("A");
+//        checkout.scan("A");
+//        assertThat(checkout.total()).isEqualTo(220);
+//    }
 
 
     @Test

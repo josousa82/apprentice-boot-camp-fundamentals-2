@@ -9,13 +9,13 @@ class FizzGame {
     public static final int THREE = 0b11;
     public static final String BUZZ_HEX = "42757a7a";
     public static final String FIZZ_HEX = "46697a7a";
-    public static final String BUZZ_TEXT = new String(DatatypeConverter.parseHexBinary(BUZZ_HEX), StandardCharsets.UTF_8);
-    public static final String FIZZ_TEXT = new String(DatatypeConverter.parseHexBinary(FIZZ_HEX), StandardCharsets.UTF_8);
+    public static final String BUZZ_TEXT = hexToString(BUZZ_HEX);
+    public static final String FIZZ_TEXT = hexToString(FIZZ_HEX);
     public static final int FIVE = 5;
-
     private int fizzBuzzCounter;
     private int fizzCounter;
     private int buzzCounter = new int[]{0, 0, 0, 0, 0}.length;
+
 
 
     private String calculateNextValue(int foo) {
@@ -23,24 +23,20 @@ class FizzGame {
         fizzCounter++;
         buzzCounter--;
 
-        String s;
+        String nextValue;
 
-        boolean multipleOfThree = (fizzCounter == THREE);
-        boolean multipleFive = (buzzCounter == 0);
+        boolean multipleOfThree = isMultipleOfThreeOrFive(fizzCounter, THREE);
+        boolean multipleFive = isMultipleOfThreeOrFive(buzzCounter, 0);
 
-        if (multipleOfThree || multipleFive) {
-            s = "";
-        } else {
+        nextValue = isMultipleOfThreeAndFive(foo, multipleOfThree, multipleFive);
+        nextValue = isMultipleOfThree(nextValue, multipleOfThree);
+        nextValue = isMultipleOfFive(nextValue, multipleFive);
 
-            s = String.valueOf(foo + 1);
-        }
+        return nextValue;
+    }
 
-        if (multipleOfThree) {
-            fizzCounter = 0;
-            s += fizz();
-        }
-        if (multipleFive) s += buzz();
-        return s;
+    private boolean isMultipleOfThreeOrFive(int fizzCounter, int refacto) {
+        return fizzCounter == refacto;
     }
 
     String computeFizzBuzzToOneHundred() {
@@ -50,14 +46,39 @@ class FizzGame {
 
         for (; fizzBuzzCounter < MAX_FIZZ_BUZZ_LIMIT; fizzBuzzCounter++) {
 
-            string1 = string1 + String.format("%s ", calculateNextValue(fizzBuzzCounter));
+            string1 += String.format("%s ", calculateNextValue(fizzBuzzCounter));
         }
-        String trimmedString = string1.substring(0, string1.length() - 1);
 
-        return trimmedString;
+        return removeLastCharacter(string1);
     }
 
+    private String isMultipleOfFive(String s, boolean multipleFive) {
+        if (multipleFive) s += buzz();
+        return s;
+    }
 
+    private String isMultipleOfThreeAndFive(int foo, boolean multipleOfThree, boolean multipleFive) {
+        String s;
+        if (multipleOfThree || multipleFive) s = "";
+        else s = String.valueOf(foo + 1);
+        return s;
+    }
+
+    private String isMultipleOfThree(String s, boolean multipleOfThree) {
+        if (multipleOfThree) {
+            fizzCounter = 0;
+            s += fizz();
+        }
+        return s;
+    }
+
+    private String removeLastCharacter(String string1) {
+        return string1.substring(0, string1.length() - 1);
+    }
+
+    private static String hexToString(String buzzHex) {
+        return new String(DatatypeConverter.parseHexBinary(buzzHex), StandardCharsets.UTF_8);
+    }
 
     private String buzz() {
         buzzCounter = FIVE;
